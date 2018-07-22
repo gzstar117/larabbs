@@ -33,6 +33,11 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+
+  #container {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
 }
 
 .footer {
@@ -46,6 +51,8 @@ body {
   .container {
     padding-right: 15px;
     padding-left: 15px;
+    margin-left: 50px;
+    margin-right: 50px;
 
     p {
       margin: 19px 0;
@@ -72,6 +79,38 @@ body {
   .user-info {
     .thumbnail {
       margin-bottom: 0px;
+    }
+  }
+}
+
+
+/* Topic Index Page */
+.topics-index-page {
+  .topic-list {
+    .nav > li > a {
+      position: relative;
+      display: block;
+      padding: 5px 14px;
+      font-size: 0.9em;
+    }
+    a {
+      color: #444444;
+    }
+    .meta {
+      font-size:0.9em;
+      color: #b3b3b3;
+      a {
+        color: #b3b3b3;
+      }
+    }
+    .badge {
+      background-color: #d8d8d8;
+    }
+    hr {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      border: 0;
+      border-top: 1px solid #dcebf5;
     }
   }
 }

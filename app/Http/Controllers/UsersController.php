@@ -12,7 +12,7 @@ class UsersController extends Controller
     public function __construct()
     {
         return $this->middleware('auth')->except([
-
+            'show'
         ]);
     }
 

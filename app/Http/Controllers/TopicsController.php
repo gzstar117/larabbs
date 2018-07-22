@@ -16,7 +16,9 @@ class TopicsController extends Controller
 
 	public function index()
 	{
-		$topics = Topic::paginate();
+	    //todo 笔记
+        //with预加载, 里面填写的是关联模型中定义的函数名
+		$topics = Topic::with(['user', 'findCategory'])->paginate();
 		return view('topics.index', compact('topics'));
 	}
 
