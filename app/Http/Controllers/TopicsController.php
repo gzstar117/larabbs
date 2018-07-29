@@ -14,11 +14,15 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index()
+	public function index(Request $request, Topic $topic)
 	{
 	    //todo 笔记
         //with预加载, 里面填写的是关联模型中定义的函数名
-		$topics = Topic::with(['user', 'findCategory'])->paginate();
+//		$topics = Topic::with(['user', 'findCategory'])->paginate();    //此行代码被下面代码取代, 其中with()的预加载, 在本地作用域withOrder()包含, 所以无需额外再写
+
+        //$request->order 是获取 URI http://larabbs.test/topics?order=recent 中的 order 参数
+        $topics = $topic->withOrder($request->order)->paginate(20);      //orderWith()是模型中的本地作用域
+
 		return view('topics.index', compact('topics'));
 	}
 
