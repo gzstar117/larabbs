@@ -13,6 +13,8 @@
 
     {{--样式--}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 
 <body>
@@ -33,6 +35,8 @@
 
     {{--引入js--}}
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('scripts')
 
 </body>
 </html>
