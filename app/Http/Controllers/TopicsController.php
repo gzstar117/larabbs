@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
+use Auth;
 
 class TopicsController extends Controller
 {
@@ -21,7 +23,7 @@ class TopicsController extends Controller
 //		$topics = Topic::with(['user', 'findCategory'])->paginate();    //此行代码被下面代码取代, 其中with()的预加载, 在本地作用域withOrder()包含, 所以无需额外再写
 
         //$request->order 是获取 URI http://larabbs.test/topics?order=recent 中的 order 参数
-        $topics = $topic->withOrder($request->order)->paginate(20);      //orderWith()是模型中的本地作用域
+        $topics = $topic->withOrder($request->order)->paginate(20);      //withOrder()是模型中的本地作用域
 
 		return view('topics.index', compact('topics'));
 	}
@@ -33,12 +35,16 @@ class TopicsController extends Controller
 
 	public function create(Topic $topic)
 	{
-		return view('topics.create_and_edit', compact('topic'));
+        $categories = Category::all();
+		return view('topics.create_and_edit', compact('topic', 'categories'));
 	}
 
-	public function store(TopicRequest $request)
+	public function store(TopicRequest $request, Topic $topic)
 	{
-		$topic = Topic::create($request->all());
+	    $topic->fill($request->all());
+	    $topic->user_id = Auth::id();
+	    $topic->save();
+
 		return redirect()->route('topics.show', $topic->id)->with('message', 'Created successfully.');
 	}
 
